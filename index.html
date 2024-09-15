@@ -5,67 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al-Amin Hossain - Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Header / Home Section -->
-    <header>
-        <div class="intro">
-            <h1>Al-Amin Hossain</h1>
-            <p>RTL Design Verification Engineer | AI Hardware Enthusiast</p>
-            <p>Hardware Security | Neuromorphic Hardware | Machine Learning</p>
-            <a href="mailto:alaminhossain01615@gmail.com" class="btn">Contact Me</a>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <h1 class="logo">Al-Amin Hossain</h1>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero">
+        <div class="container">
+            <h2>Hello, I'm <span>Al-Amin Hossain</span></h2>
+            <p>RTL Design Verification Engineer & Hardware Enthusiast</p>
+            <a href="#contact" class="btn">Let's Connect</a>
         </div>
     </header>
 
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="container">
         <h2>About Me</h2>
-        <p>I am an RTL Design Verification Engineer with expertise in system protocols like APB, AHB, UART, and I2C. I have a strong academic background with a Bachelor's degree in Electrical and Electronic Engineering, and I am passionate about Hardware for AI and Neuromorphic Hardware.</p>
+        <p>I am an RTL Design Verification Engineer with experience in functional verification using UVM, Assertion-Based Verification, and system protocols like APB, AHB, UART, and I2C. My academic background includes a Bachelor's degree in Electrical and Electronic Engineering. I am passionate about Hardware for AI, Neuromorphic Hardware, and Hardware Accelerators for Machine Learning.</p>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
+    <section id="skills" class="container">
         <h2>Skills</h2>
-        <ul>
-            <li>Programming Languages: Python, MATLAB, C</li>
-            <li>HDL: Verilog, SystemVerilog</li>
-            <li>Verification: UVM, Assertion-Based Verification, Functional Coverage</li>
-            <li>Tools: Cadence IUS, Proteus, ModelSim, Git</li>
-            <li>Machine Learning Libraries: Keras, Scikit Learn, Pandas</li>
-        </ul>
+        <div class="skills-grid">
+            <div class="skill">
+                <h3>Programming</h3>
+                <p>Python, MATLAB, C</p>
+            </div>
+            <div class="skill">
+                <h3>HDL</h3>
+                <p>Verilog, SystemVerilog</p>
+            </div>
+            <div class="skill">
+                <h3>Tools</h3>
+                <p>Cadence IUS, Proteus, ModelSim, Git</p>
+            </div>
+            <div class="skill">
+                <h3>Libraries</h3>
+                <p>UVM, Pandas, Keras, Scikit Learn</p>
+            </div>
+            <div class="skill">
+                <h3>Protocols</h3>
+                <p>APB, AHB, UART, I2C, DDR4, HBM, UCIe</p>
+            </div>
+        </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects">
+    <section id="projects" class="container">
         <h2>Projects</h2>
-        <div class="project">
-            <h3>Verification of General-Purpose Timer Module (GPTM)</h3>
-            <p>Developed a robust testbench architecture using UVM and integrated Register Abstraction Layer (RAL) models. Achieved high coverage and validated design reliability.</p>
-        </div>
-        <div class="project">
-            <h3>Verification of AHB-UART</h3>
-            <p>Designed and implemented a testbench with multiple agents including AHB and UART, achieving 100% code coverage.</p>
-        </div>
-        <div class="project">
-            <h3>Speech Recognition System</h3>
-            <p>Developed a speech recognition project using MATLAB and signal processing techniques, achieving 95% accuracy in digit recognition.</p>
+        <div class="projects-grid">
+            <div class="project">
+                <h3>General-Purpose Timer Module Verification</h3>
+                <p>Developed a robust testbench architecture using UVM and integrated RAL models. Achieved high functional and code coverage.</p>
+            </div>
+            <div class="project">
+                <h3>AHB-UART Verification</h3>
+                <p>Designed and implemented a testbench using multiple agents like AHB and UART, achieving 100% coverage.</p>
+            </div>
+            <div class="project">
+                <h3>Speech Recognition System</h3>
+                <p>Developed a MATLAB-based digit recognition system with 95% accuracy using MFCC and DTW algorithms.</p>
+            </div>
         </div>
     </section>
 
     <!-- Education Section -->
-    <section id="education">
+    <section id="education" class="container">
         <h2>Education</h2>
-        <p><strong>B.Sc. in Electrical and Electronic Engineering</strong></p>
-        <p>Islamic University of Technology (IUT), GPA: 3.83/4.00 (Jan 2017 - May 2022)</p>
+        <p>B.Sc. in Electrical and Electronic Engineering</p>
+        <p>Islamic University of Technology (IUT) - GPA: 3.83/4.00</p>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
+    <section id="contact" class="container">
         <h2>Contact</h2>
         <p>Email: <a href="mailto:alaminhossain01615@gmail.com">alaminhossain01615@gmail.com</a></p>
         <p>LinkedIn: <a href="https://www.linkedin.com/in/al-amin-hossain-691633215/">Al-Amin Hossain</a></p>
     </section>
+
+    <footer>
+        <p>&copy; 2024 Al-Amin Hossain. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
