@@ -1,806 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al-Amin Hossain | Design Verification Engineer</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1e40af;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --bg-light: #f9fafb;
-            --bg-white: #ffffff;
-            --border: #e5e7eb;
-            --accent: #10b981;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--bg-light);
-        }
-
-        /* Navigation */
-        nav {
-            background: var(--bg-white);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 4rem 0;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.95;
-        }
-
-        .hero .location {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-        }
-
-        .hero .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.75rem 2rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        /* Section Titles */
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            color: var(--text-primary);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--primary);
-            margin: 1rem auto 0;
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .about-text {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-        }
-
-        .research-interests {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .research-interests h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .interest-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background: var(--bg-light);
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        /* Experience Section */
-        .experience-item {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 1rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--primary);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .experience-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .experience-company {
-            color: var(--primary);
-            font-weight: 600;
-            margin-top: 0.25rem;
-        }
-
-        .experience-date {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .experience-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .experience-item li {
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-            color: var(--text-secondary);
-        }
-
-        .experience-item li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .skill-category h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .skill-category p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--bg-white);
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .project-date {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .project-tag {
-            background: var(--bg-light);
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.85rem;
-            color: var(--primary);
-            border: 1px solid var(--border);
-        }
-
-        /* Education Section */
-        .education-timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .education-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border);
-        }
-
-        .education-item {
-            position: relative;
-            margin-bottom: 3rem;
-            padding-left: 2rem;
-        }
-
-        .education-item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 3px solid var(--bg-light);
-        }
-
-        .education-degree {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .education-school {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .education-date {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-details {
-            color: var(--text-secondary);
-        }
-
-        /* Publications Section */
-        .publication-item {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 1.5rem;
-        }
-
-        .publication-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .publication-authors {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .publication-venue {
-            color: var(--primary);
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--bg-white);
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            padding: 1rem 2rem;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .contact-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--text-primary);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        footer p {
-            opacity: 0.8;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-header {
-                flex-direction: column;
-            }
-
-            section {
-                padding: 3rem 0;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al-Amin Hossain — Design Verification Engineer</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="logo">Al-Amin Hossain</div>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Al-Amin Hossain</h1>
-            <p class="subtitle">Design Verification Engineer | Passionate about Hardware Research </p>
-            <p class="location">📍 Dresden, Germany | 🎓 Pursuing M.Sc. Nanoelectronic Systems @ TU Dresden</p>
-            <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="#projects" class="btn btn-secondary">View My Work</a>
-            </div>
-        </div>
-    </section>
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-name" href="#">Al-Amin Hossain</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="nav-download" onclick="downloadCV(event)">↓ CV</a></li>
+  </ul>
+</nav>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I am a passionate Design Verification Engineer with 2+ years of industry experience in UVM-based verification and a strong research background in AI and machine learning.</p>
-                    <p>Currently pursuing my Master's in Nanoelectronic Systems at TU Dresden, I specialize in hardware verification methodologies, with particular research interest in neuromorphic hardware and AI hardware accelerators.</p>
-                    <p>My unique combination of industrial verification expertise and academic research in neural networks positions me at the intersection of traditional hardware verification and cutting-edge AI hardware development.</p>
-                    <p><strong>Availability:</strong> Open to working student positions (20 hrs/week) and full-time opportunities post-graduation.</p>
-                </div>
-                <div class="research-interests">
-                    <h3>Research Interests</h3>
-                    <div class="interest-tags">
-                        <span class="tag">Hardware Verification</span>
-                        <span class="tag">Neuromorphic Hardware</span>
-                        <span class="tag">Edge AI</span>
-                        <span class="tag">AI Hardware and Accelerators</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow" id="h-eyebrow"></p>
+    <h1 class="hero-name"   id="h-name"></h1>
+    <p class="hero-role"    id="h-tagline"></p>
+    <div class="hero-meta"  id="h-meta"></div>
+    <div class="hero-actions">
+      <button class="btn btn-dark"    onclick="downloadCV(event)">↓ Download CV</button>
+      <a      class="btn btn-outline" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Experience Section -->
-    <section id="experience" style="background: var(--bg-white);">
-        <div class="container">
-            <h2 class="section-title">Professional Experience</h2>
-            
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Assistant Engineer – RTL Design Verification</div>
-                        <div class="experience-company">Ulkasemi Pvt. Ltd., Bangladesh</div>
-                    </div>
-                    <div class="experience-date">Nov 2022 – Oct 2024</div>
-                </div>
-                <ul>
-                    <li>Architected and deployed UVM-based verification environments for 5+ complex IP blocks including timers, communication interfaces, and bus protocols</li>
-                    <li>Developed comprehensive UVM RAL models for 100+ registers, enabling efficient register-level testing</li>
-                    <li>Authored 100+ SystemVerilog Assertions catching 15+ critical design bugs pre-silicon</li>
-                    <li>Engineered Python automation frameworks achieving 80% reduction in manual verification effort</li>
-                    <li>Gained exposure to advanced memory architectures: DDR4, HBM, and UCIe protocols</li>
-                    <li>Mentored trainee engineers on UVM methodology and verification best practices</li>
-                    <li>Consistently achieved 100% code coverage and maximum functional coverage</li>
-                </ul>
-            </div>
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="wrap">
+    <p class="sec-label">About</p>
+    <div class="about-grid">
+      <div id="about-bio"></div>
+      <div>
+        <p class="interests-heading">Research Interests</p>
+        <div class="interests-list" id="interests-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Intern – Spectrum & Technical Regulation</div>
-                        <div class="experience-company">Robi Axiata Ltd., Bangladesh</div>
-                    </div>
-                    <div class="experience-date">May 2022 – Aug 2022</div>
-                </div>
-                <ul>
-                    <li>Supported network performance optimization through spectrum analysis and interference mitigation</li>
-                    <li>Analyzed regulatory compliance documentation for telecommunications infrastructure</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<hr class="rule">
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Verification Languages & Methodologies</h3>
-                    <p>SystemVerilog (UVM), Verilog, SystemVerilog Assertions (SVA), Coverage-Driven Verification, Constrained Random Verification, Register Abstraction Layer (RAL), Formal Verification</p>
-                </div>
-                <div class="skill-category">
-                    <h3>Protocols & Interfaces</h3>
-                    <p>AMBA (AHB, APB, AXI), UART, I2C, SPI</p>
-                </div>
-                <div class="skill-category">
-                    <h3>EDA Tools</h3>
-                    <p>Cadence (IUS, SimVision, IMC), Mentor Graphics (Modelsim, Questa), Synopsys VCS</p>
-                </div>
-                <div class="skill-category">
-                    <h3>Machine Learning & AI</h3>
-                    <p>TensorFlow, Keras, PyTorch, Scikit-learn, Deep Learning (CNN, RNN, LSTM), Transfer Learning, Bio-Inspired Optimization</p>
-                </div>
-                <div class="skill-category">
-                    <h3>Programming & Scripting</h3>
-                    <p>Python, MATLAB, Bash, Git/GitHub/GitLab</p>
-                </div>
-                <div class="skill-category">
-                    <h3>Development Environment</h3>
-                    <p>Linux/Unix, Windows, VI/Vim, VS Code, Jupyter Notebook</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="wrap">
+    <p class="sec-label">Experience</p>
+    <div id="exp-list"></div>
+  </div>
+</section>
 
-    <!-- Projects Section -->
-    <section id="projects" style="background: var(--bg-white);">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-title">UVM Verification of GPTM</div>
-                        <div class="project-date">Dec 2023 – Mar 2024</div>
-                        <p class="project-description">Designed complete UVM testbench with modular architecture for General-Purpose Timer Module. Implemented RAL model with callbacks and developed SVA-based checkers for interrupt generation and timer overflow validation.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">UVM</span>
-                            <span class="project-tag">SystemVerilog</span>
-                            <span class="project-tag">RAL</span>
-                            <span class="project-tag">SVA</span>
-                        </div>
-                    </div>
-                </div>
+<hr class="rule">
 
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-title">AHB-to-UART Bridge Verification</div>
-                        <div class="project-date">Jul 2023 – Dec 2023</div>
-                        <p class="project-description">Architected dual-agent UVM testbench for protocol verification. Designed constrained random sequences for burst transfers and error injection. Implemented reference model for end-to-end data integrity checking.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">AMBA AHB</span>
-                            <span class="project-tag">UART</span>
-                            <span class="project-tag">UVM</span>
-                            <span class="project-tag">Protocol Verification</span>
-                        </div>
-                    </div>
-                </div>
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="wrap">
+    <p class="sec-label">Skills</p>
+    <table class="skills-table" id="skills-table"></table>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-title">CNN-BiLSTM Load Forecasting</div>
-                        <div class="project-date">Jan 2021 – May 2022</div>
-                        <p class="project-description">Designed novel hybrid deep learning architecture combining CNN and BiLSTM for temporal forecasting. Achieved superior performance compared to state-of-the-art models. Published in AIP Conference Proceedings.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Deep Learning</span>
-                            <span class="project-tag">CNN</span>
-                            <span class="project-tag">LSTM</span>
-                            <span class="project-tag">Python</span>
-                        </div>
-                    </div>
-                </div>
+<hr class="rule">
 
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-title">Multi-Protocol Slave Verification</div>
-                        <div class="project-date">Jan 2023 – Jun 2023</div>
-                        <p class="project-description">Built UVM components for I2C, AHB, and APB protocols. Applied constraint randomization for diverse stimulus generation. Achieved 100% coverage closure and identified 12+ design issues.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">I2C</span>
-                            <span class="project-tag">AHB</span>
-                            <span class="project-tag">APB</span>
-                            <span class="project-tag">Coverage</span>
-                            <span class="project-tag">Constraint randomization</span>
-                        </div>
-                    </div>
-                </div>
+<!-- ── PROJECTS ── -->
+<section id="projects" class="section-alt">
+  <div class="wrap">
+    <p class="sec-label">Projects</p>
+    <div class="proj-grid" id="proj-grid"></div>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-title">4-bit ALU Design (Verilog)</div>
-                        <div class="project-date">2021</div>
-                        <p class="project-description">Designed resource-optimized ALU supporting arithmetic operations using single adder circuit. Implemented FSM-based control unit demonstrating hardware efficiency.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Verilog</span>
-                            <span class="project-tag">FSM</span>
-                            <span class="project-tag">Hardware Design</span>
-                        </div>
-                    </div>
-                </div>
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="wrap">
+    <p class="sec-label">Education</p>
+    <div id="edu-list"></div>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-title">Medical Image Analysis with Bio-Inspired Optimization</div>
-                        <div class="project-date">Sep 2020 – Dec 2021</div>
-                        <p class="project-description">Developed Chaotic Binary Manta Ray Foraging Optimization algorithm for feature selection. Implemented VGG-19 transfer learning for leukemia detection from blood cell images.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Transfer Learning</span>
-                            <span class="project-tag">Optimization</span>
-                            <span class="project-tag">Medical Imaging</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<hr class="rule">
 
-    <!-- Education Section -->
-    <section id="education">
-        <div class="container">
-            <h2 class="section-title">Education</h2>
-            <div class="education-timeline">
-                <div class="education-item">
-                    <div class="education-degree">Master of Science in Nanoelectronic Systems</div>
-                    <div class="education-school">Technische Universität Dresden (TU Dresden), Germany</div>
-                    <div class="education-date">Oct 2025 – Present (Expected: Sep 2027)</div>
-                    <div class="education-details">
-                        <strong>Coursework:</strong> Hardware Modeling and Simulation, Neural Network Hardware Accelerators, Memristive Systems<br>
-                        <strong>Research Focus:</strong> Verification methodologies using AI, neuromorphic hardware and AI accelerators
-                    </div>
-                </div>
+<!-- ── PUBLICATIONS ── -->
+<section id="publications">
+  <div class="wrap">
+    <p class="sec-label">Publications</p>
+    <div id="pub-list"></div>
+  </div>
+</section>
 
-                <div class="education-item">
-                    <div class="education-degree">Master of Science in Electronic Design and Technology</div>
-                    <div class="education-school">University of Siegen, Germany</div>
-                    <div class="education-date">Oct 2024 – Sep 2025</div>
-                    <div class="education-details">
-                        Transferred to TU Dresden to specialize in nanoelectronic systems
-                    </div>
-                </div>
+<!-- ── CONTACT ── -->
+<section id="contact" class="contact-wrap">
+  <div class="wrap">
+    <h2 class="contact-heading">Let's connect</h2>
+    <p class="contact-sub">Currently seeking working student positions in hardware verification and related research. Reach out to collaborate or discuss opportunities.</p>
+    <div class="contact-links" id="contact-links"></div>
+  </div>
+</section>
 
-                <div class="education-item">
-                    <div class="education-degree">Bachelor of Science in Electrical and Electronic Engineering</div>
-                    <div class="education-school">Islamic University of Technology (IUT), Bangladesh</div>
-                    <div class="education-date">Jan 2018 – May 2022</div>
-                    <div class="education-details">
-                        <strong>GPA:</strong> 3.83/4.00 (Distinction - Top 10%)<br>
-                        <strong>Relevant Courses:</strong> Digital Logic Design, Embedded Systems, Artificial Neural Networks, Digital Signal Processing
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ── FOOTER ── -->
+<footer>
+  <p id="footer-left"></p>
+  <p id="footer-right"></p>
+</footer>
 
-    <!-- Publications Section -->
-    <section id="publications" style="background: var(--bg-white);">
-        <div class="container">
-            <h2 class="section-title">Publications</h2>
-            <div class="publication-item">
-                <div class="publication-title">An efficient short term load demand forecasting using a novel parallel CNN-BiLSTM hybrid neural network for Bangladesh perspective</div>
-                <div class="publication-authors">Al-Amin, M. T., <strong>Hossain, A. A.</strong>, Jawad, T., & Rahmand, M. A.</div>
-                <div class="publication-venue">AIP Conference Proceedings, 3245, 020009 (2024) | DOI: 10.1063/5.0231967</div>
-            </div>
-        </div>
-    </section>
+<!-- ── Scripts: load order matters ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="data.js"></script>         <!-- ← YOUR DATA -->
+<script src="cv-generator.js"></script> <!-- PDF builder -->
+<script src="render.js"></script>       <!-- Website painter -->
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <h2 class="section-title">Get In Touch</h2>
-                <p>I am currently seeking working student opportunities in hardware design & verification and related research positions. Feel free to reach out if you would like to collaborate or discuss opportunities!</p>
-                <div class="contact-links">
-                    <a href="mailto:alaminhossain01615@gmail.com" class="contact-btn">📧 Email Me</a>
-                    <a href="https://www.linkedin.com/in/alaminhossain01615/" class="contact-btn" target="_blank">💼 LinkedIn</a>
-                    <a href="https://github.com/yourusername" class="contact-btn" target="_blank">💻 GitHub</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Al-Amin Hossain</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">📍 Based in Dresden, Germany</p>
-        </div>
-    </footer>
+</body>
+</html>
