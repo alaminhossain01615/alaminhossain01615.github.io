@@ -8,11 +8,12 @@
  */
 
 const DATA = {
-
-  // ── Personal ────────────────────────────────────────────
   name:         "Al-Amin Hossain",
   title:        "Design Verification Engineer",
-  tagline:      "Design Verification Engineer with 2+ years of industry experience in UVM-based IP verification. Strong expertise in SystemVerilog, UVM, coverage-driven verification, and Python automation. Currently pursuing an M.Sc. in Nanoelectronic Systems at TU Dresden.",
+  // Drop your ImgBB direct link or Base64 string here. 
+  // If left empty (""), the script auto-renders a clean visual placeholder box.
+  image:        "https://ibb.co/4w1jrsNg", 
+  tagline:      "Design Verification Engineer with 2+ years of industry experience...",
   address:      "Wundtstr. 7, 01217 Dresden, Germany",
   phone:        "+49 15510110425",
   email:        "alaminhossain01615@gmail.com",

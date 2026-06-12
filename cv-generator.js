@@ -1,8 +1,7 @@
 /**
  * cv-generator.js
  * Generates a PDF CV from DATA (data.js).
- * Layout closely matches a traditional professional CV.
- * You never need to touch this file — edit data.js only.
+ * Layout matches a traditional professional CV with an image profile.
  */
 
 async function downloadCV(e) {
@@ -21,13 +20,11 @@ async function downloadCV(e) {
   const INK2 = [40,  40,  40 ];
   const INK3 = [100, 100, 100];
   const RULE = [180, 180, 180];
-  const WHT  = [255, 255, 255];
 
-  // ── Line spacing constants (tight, like a real CV) ──────
-  const LS_BODY   = 4.8;   // normal body line height (mm for 9pt)
-  const LS_SMALL  = 4.2;   // small text
-  const LS_HEAD   = 5.8;   // section heading line
-  const BULLET_X  = ML + 3.5;
+  // ── Line spacing constants ──────────────────────────────
+  const LS_BODY   = 4.8;   
+  const LS_SMALL  = 4.2;   
+  const LS_HEAD   = 5.8;   
   const BODY_X    = ML + 5.5;
 
   // ── Helpers ──────────────────────────────────────────────
@@ -42,7 +39,6 @@ async function downloadCV(e) {
     return doc.splitTextToSize(String(text), maxW);
   }
 
-  // Height of wrapped lines (in mm)
   function linesH(lines, lsMm) {
     return (Array.isArray(lines) ? lines.length : 1) * (lsMm || LS_BODY);
   }
@@ -54,84 +50,105 @@ async function downloadCV(e) {
     }
   }
 
-  // Print a bullet point with hanging indent
   function bullet(text, bodyW, fs) {
     const bl = wrap(text, bodyW - 1, fs || 9);
     checkPage(linesH(bl, LS_BODY) + 1.5);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(fs || 9);
     doc.setTextColor(...INK2);
-    // bullet glyph
     doc.text('•', ML + 1, y);
-    // indented text
     doc.text(bl, BODY_X, y);
     y += linesH(bl, LS_BODY) + 0.8;
   }
 
   // ════════════════════════════════════════════════════════
-  // HEADER — name block
+  // HEADER SECTION (Two Columns: Left text, Right Image)
   // ════════════════════════════════════════════════════════
   y = 18;
 
-  // Name — large, bold
+  // --- RIGHT COLUMN: Image Placement ---
+  // If you use an external URL or a Base64 string, place it in D.image inside data.js
+  // For now, we will use a fallback placeholder block if no image is provided.
+  const imgW = 28;
+  const imgH = 32;
+  const imgX = PW - MR - imgW;
+  
+  if (D.image && D.image !== "") {
+    try {
+      // Formats supported: 'JPEG', 'PNG', 'WEBP'
+      doc.addImage(D.image, 'JPEG', imgX, y, imgW, imgH);
+    } catch (err) {
+      // Fallback placeholder box if the image path/URL fails to resolve
+      doc.setDrawColor(...RULE);
+      doc.rect(imgX, y, imgW, imgH);
+      doc.setFontSize(7);
+      doc.setTextColor(...INK3);
+      doc.text('[ Image Pass ]', imgX + 4, y + (imgH / 2));
+    }
+  } else {
+    // Standard visual placeholder box
+    doc.setDrawColor(...RULE);
+    doc.rect(imgX, y, imgW, imgH);
+    doc.setFontSize(8);
+    doc.setTextColor(...INK3);
+    doc.text('Placeholder', imgX + 5, y + 14);
+    doc.text('Image', imgX + 9, y + 19);
+  }
+
+  // --- LEFT COLUMN: Personal Info ---
+  const leftColW = TW - imgW - 5; // Allow 5mm clearance space
+
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(22);
   doc.setTextColor(...INK);
   doc.text(D.name, ML, y);
-  y += 8;
+  y += 7;
 
-  // Address line
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   doc.setTextColor(...INK2);
   doc.text(D.address, ML, y);
   y += LS_BODY;
 
-  // Phone + Email
   doc.text('Phone: ' + D.phone, ML, y);
   y += LS_BODY;
   doc.text('Email: ' + D.email, ML, y);
   y += LS_BODY;
 
-// Clickable link buttons: LinkedIn | GitHub | Website
+  // Clickable link buttons: LinkedIn | GitHub | Website
   const links = [
     { label: 'LinkedIn', url: D.linkedin },
     { label: 'GitHub',   url: D.github },
     { label: 'Website',  url: 'https://' + D.website.replace('https://', '') }
   ];
-  
   let lx = ML;
   links.forEach((lk, i) => {
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9); // Made slightly larger to match standard text readability
-    doc.setTextColor(40, 100, 200); // Clean hyperlink blue
-    
-    // 1. Print the clean label and tie the interactive link to it
+    doc.setFontSize(9);
+    doc.setTextColor(40, 100, 200); // Standard clean link blue
     doc.textWithLink(lk.label, lx, y, { url: lk.url });
-    
-    // Move our tracker past the label text
     lx += doc.getTextWidth(lk.label) + 1.5;
-    
-    // 2. Print the divider if it's not the last link
     if (i < links.length - 1) {
       doc.setTextColor(...INK3);
       doc.text('|', lx, y);
-      lx += doc.getTextWidth('|') + 2; // Add a little breathing room after the divider
+      lx += doc.getTextWidth('|') + 1.5;
     }
   });
-  y += 7;
 
-  // Thick rule under header
+  // Balance y position past the bottom of the image height context safely
+  y = Math.max(y + 6, 18 + imgH + 5);
+
+  // Divider line separating header from main profile content
   hRule(0.5, INK3);
   y += 6;
 
   // ════════════════════════════════════════════════════════
-  // HELPER — section heading
+  // HELPER — Section Heading Engine
   // ════════════════════════════════════════════════════════
   function secHead(label) {
     checkPage(16);
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10.5);
+    doc.setFontSize(11);
     doc.setTextColor(...INK);
     doc.text(label, ML, y);
     y += 1.5;
@@ -140,8 +157,10 @@ async function downloadCV(e) {
   }
 
   // ════════════════════════════════════════════════════════
-  // PROFESSIONAL SUMMARY
+  // SECTIONS FLOW
   // ════════════════════════════════════════════════════════
+  
+  // 1. Professional Summary
   secHead('Professional Summary');
   const sumLines = wrap(D.tagline, TW, 9);
   doc.setFont('helvetica', 'normal');
@@ -150,25 +169,19 @@ async function downloadCV(e) {
   doc.text(sumLines, ML, y);
   y += linesH(sumLines, LS_BODY) + 6;
 
-  // ════════════════════════════════════════════════════════
-  // EDUCATION
-  // ════════════════════════════════════════════════════════
+  // 2. Education
   secHead('Education');
   D.education.forEach(e => {
     checkPage(20);
-
-    // Degree — bold, school — italic, on the same line separated by em dash
     const degSchool = e.degree + ' \u2014 ' + e.school;
-    const dsLines = wrap(degSchool, TW - 42, 9);
+    const dsLines = wrap(degSchool, TW - 45, 9);
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(9);
     doc.setTextColor(...INK);
     doc.text(dsLines, ML, y);
 
-    // Period flush right
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
     doc.setTextColor(...INK3);
     const pW = doc.getTextWidth(e.period);
     doc.text(e.period, PW - MR - pW, y);
@@ -186,15 +199,12 @@ async function downloadCV(e) {
     y += 3.5;
   });
 
-  // ════════════════════════════════════════════════════════
-  // TECHNICAL SKILLS
-  // ════════════════════════════════════════════════════════
+  // 3. Technical Skills
   secHead('Technical Skills');
   D.skills.forEach(s => {
     checkPage(10);
-    // "Category:" bold, then normal items on same line
     const label = s.cat + ': ';
-    const labelW = doc.getTextWidth(label) + 0.5; // approx at fs 9
+    const labelW = doc.getTextWidth(label) + 0.5;
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(9);
     doc.setTextColor(...INK);
@@ -202,131 +212,109 @@ async function downloadCV(e) {
 
     const itemLines = wrap(s.items, TW - labelW, 9);
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
     doc.setTextColor(...INK2);
     doc.text(itemLines, ML + labelW, y);
     y += linesH(itemLines, LS_BODY) + 1;
   });
   y += 3;
 
-  // ════════════════════════════════════════════════════════
-  // PROFESSIONAL EXPERIENCE
-  // ════════════════════════════════════════════════════════
+  // 4. Professional Experience
   secHead('Professional Experience');
   D.experience.forEach(exp => {
-    checkPage(30);
-
-    // Role title flush left, period flush right
+    checkPage(25);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(9.5);
     doc.setTextColor(...INK);
     doc.text(exp.title, ML, y);
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
     doc.setTextColor(...INK3);
     const pW = doc.getTextWidth(exp.period);
     doc.text(exp.period, PW - MR - pW, y);
     y += LS_HEAD;
 
-    // Company, location, type — italic
     doc.setFont('helvetica', 'italic');
     doc.setFontSize(8.5);
     doc.setTextColor(...INK2);
-    const subLine = exp.company + ', ' + exp.location + (exp.type ? '    ' + exp.type : '');
+    const subLine = exp.company + ', ' + exp.location + (exp.type ? '   |   ' + exp.type : '');
     doc.text(subLine, ML, y);
     y += LS_BODY + 1;
 
-    // Bullets
     exp.bullets.forEach(b => bullet(b, TW, 9));
-    y += 3.5;
+    y += 2.5;
   });
 
-  // ════════════════════════════════════════════════════════
-  // KEY VERIFICATION PROJECTS
-  // ════════════════════════════════════════════════════════
+  // 5. Key Verification Projects
   secHead('Key Verification Projects');
   D.projects.forEach(p => {
     checkPage(24);
-
-    // Project name flush left, period flush right
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(9.5);
     doc.setTextColor(...INK);
     doc.text(p.name, ML, y);
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
     doc.setTextColor(...INK3);
     const pW = doc.getTextWidth(p.period);
     doc.text(p.period, PW - MR - pW, y);
     y += LS_HEAD + 1;
 
-    // Bullets
     p.bullets.forEach(b => bullet(b, TW, 9));
-    y += 3.5;
+    y += 2.5;
   });
 
-  // ════════════════════════════════════════════════════════
-  // PUBLICATIONS
-  // ════════════════════════════════════════════════════════
-  secHead('Publications');
-  D.publications.forEach(p => {
-    checkPage(20);
+  // 6. Publications
+  if (D.publications && D.publications.length > 0) {
+    secHead('Publications');
+    D.publications.forEach(p => {
+      checkPage(20);
+      const tLines = wrap(p.title, TW, 9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...INK);
+      doc.text(tLines, ML, y);
+      y += linesH(tLines, LS_BODY) + 0.8;
 
-    const tLines = wrap(p.title, TW, 9);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(...INK);
-    doc.text(tLines, ML, y);
-    y += linesH(tLines, LS_BODY) + 0.8;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...INK2);
+      doc.text(p.authors, ML, y);
+      y += LS_SMALL + 0.5;
 
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(...INK2);
-    doc.text(p.authors, ML, y);
-    y += LS_SMALL + 0.5;
+      doc.setFont('helvetica', 'italic');
+      doc.setTextColor(...INK3);
+      doc.text(p.venue, ML, y);
+      y += 5;
+    });
+  }
 
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(8.5);
-    doc.setTextColor(...INK3);
-    doc.text(p.venue, ML, y);
-    y += 6;
-  });
-
-  // ════════════════════════════════════════════════════════
-  // LANGUAGES & AVAILABILITY
-  // ════════════════════════════════════════════════════════
+  // 7. Languages & Availability
   secHead('Languages & Availability');
+  checkPage(25);
 
-  // Languages
   const langStr = D.languages.map(l => l.lang + ' (' + l.level + ')').join(',   ');
   doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(...INK);
   doc.text('Languages:', ML, y);
   doc.setFont('helvetica', 'normal'); doc.setTextColor(...INK2);
-  doc.text(langStr, ML + doc.getTextWidth('Languages:') + 1.5, y);
-  y += LS_BODY + 1;
+  doc.text(langStr, ML + doc.getTextWidth('Languages:') + 2, y);
+  y += LS_BODY + 0.5;
 
-  // Work auth
   doc.setFont('helvetica', 'bold'); doc.setTextColor(...INK);
   doc.text('Work Authorization:', ML, y);
   doc.setFont('helvetica', 'normal'); doc.setTextColor(...INK2);
-  doc.text(D.workAuth, ML + doc.getTextWidth('Work Authorization:') + 1.5, y);
-  y += LS_BODY + 1;
+  doc.text(D.workAuth, ML + doc.getTextWidth('Work Authorization:') + 2, y);
+  y += LS_BODY + 0.5;
 
-  // Availability
   doc.setFont('helvetica', 'bold'); doc.setTextColor(...INK);
   doc.text('Availability:', ML, y);
   doc.setFont('helvetica', 'normal'); doc.setTextColor(...INK2);
-  doc.text(D.availability, ML + doc.getTextWidth('Availability:') + 1.5, y);
-  y += LS_BODY + 1;
+  doc.text(D.availability, ML + doc.getTextWidth('Availability:') + 2, y);
+  y += LS_BODY + 0.5;
 
-  // Location
   doc.setFont('helvetica', 'bold'); doc.setTextColor(...INK);
   doc.text('Location:', ML, y);
   doc.setFont('helvetica', 'normal'); doc.setTextColor(...INK2);
-  doc.text('Dresden', ML + doc.getTextWidth('Location:') + 1.5, y);
+  doc.text('Dresden, Germany', ML + doc.getTextWidth('Location:') + 2, y);
 
-  // ── Save ────────────────────────────────────────────────
+  // ── Save Document ───────────────────────────────────────
   doc.save(D.name.replace(/\s+/g, '_') + '_CV.pdf');
 }
