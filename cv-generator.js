@@ -66,17 +66,15 @@ async function downloadCV(e) {
   // ════════════════════════════════════════════════════════
   y = 18;
 
-  // --- RIGHT COLUMN: Image Placement ---
-  // If you use an external URL or a Base64 string, place it in D.image inside data.js
-  // For now, we will use a fallback placeholder block if no image is provided.
+// --- RIGHT COLUMN: Image Placement ---
   const imgW = 28;
-  const imgH = 32;
+  const imgH = 35; // Bumped height slightly to match standard professional portrait proportions
   const imgX = PW - MR - imgW;
   
-  if (D.image && D.image !== "") {
+  if (D.image && D.image.trim() !== "") {
     try {
-      // Formats supported: 'JPEG', 'PNG', 'WEBP'
-      doc.addImage(D.image, 'JPEG', imgX, y, imgW, imgH);
+      // Passing 'NONE' alias settings ensures jsPDF respects proportions without squeezing
+      doc.addImage(D.image, 'JPEG', imgX, y, imgW, imgH, undefined, 'NONE');
     } catch (err) {
       // Fallback placeholder box if the image path/URL fails to resolve
       doc.setDrawColor(...RULE);

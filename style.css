@@ -135,16 +135,17 @@ hr.rule { border: none; border-top: 1px solid var(--rule); }
 }
 
 #h-photo {
-  width: 150px;
-  height: 180px;
-  object-fit: cover;
+  width: 170px;         /* Increased width */
+  height: 210px;        /* Increased height to preserve standard portrait look */
+  object-fit: cover;    /* Automatically crops sides if your photo isn't an exact ratio matches */
+  object-position: center top; /* Keeps your face focused if cropping occurs */
   border-radius: 6px;
   border: 1px solid var(--rule);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Smoother, deeper drop shadow */
   background-color: var(--white);
 }
 
-/* Responsiveness for Mobile Devices */
+/* Adjusted alignment on smaller mobile views */
 @media (max-width: 768px) {
   .hero-container {
     flex-direction: column-reverse;
@@ -155,8 +156,8 @@ hr.rule { border: none; border-top: 1px solid var(--rule); }
     justify-content: center;
   }
   #h-photo {
-    width: 130px;
-    height: 150px;
+    width: 150px;
+    height: 185px;
   }
 }
 
