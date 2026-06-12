@@ -93,12 +93,25 @@ async function downloadCV(e) {
   doc.text('Email: ' + D.email, ML, y);
   y += LS_BODY;
 
-  // LinkedIn  GitHub  Website
-  const linksStr =
-    'LinkedIn: ' + D.linkedin.replace('https://', '') +
-    '    GitHub: ' + D.github.replace('https://', '') +
-    '    Website: ' + D.website.replace('https://', '');
-  doc.text(linksStr, ML, y);
+  // Clickable link buttons: LinkedIn | GitHub | Website
+  const links = [
+    { label: 'LinkedIn', url: D.linkedin },
+    { label: 'GitHub',   url: D.github },
+    { label: 'Website',  url: 'https://' + D.website.replace('https://', '') }
+  ];
+  let lx = ML;
+  links.forEach((lk, i) => {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(40, 100, 200);
+    doc.textWithLink(lk.label, lx, y, { url: lk.url });
+    lx += doc.getTextWidth(lk.label) + 1;
+    if (i < links.length - 1) {
+      doc.setTextColor(...INK3);
+      doc.text(' |', lx - 1, y);
+      lx += doc.getTextWidth(' | ') + 0.5;
+    }
+  });
   y += 7;
 
   // Thick rule under header
