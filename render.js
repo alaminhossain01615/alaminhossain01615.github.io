@@ -13,10 +13,19 @@ function render() {
     D.name.split(' ').map((w, i) => i === 0 ? w : `<strong>${w}</strong>`).join(' ');
   document.getElementById('h-tagline').textContent = D.tagline;
   document.getElementById('h-meta').innerHTML = `
-    <span class="meta-item">📍 ${D.address}</span>
-    <span class="meta-item">📞 ${D.phone}</span>
-    <span class="meta-item">✉ ${D.email}</span>
+    <span class=\"meta-item\">📍 ${D.address}</span>
+    <span class=\"meta-item\">📞 ${D.phone}</span>
+    <span class=\"meta-item\">✉ ${D.email}</span>
   `;
+
+  // Dynamic Image Rendering Hook
+  const photoEl = document.getElementById('h-photo');
+  if (D.image && D.image.trim() !== "") {
+    photoEl.src = D.image;
+    photoEl.style.display = 'block'; // Show image element if URL exists
+  } else {
+    photoEl.style.display = 'none';  // Hide cleanly if no image is supplied
+  }
 
   // ── About ─────────────────────────────────────────────
   const bio = document.getElementById('about-bio');

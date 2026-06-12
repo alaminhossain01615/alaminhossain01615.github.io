@@ -12,7 +12,7 @@ const DATA = {
   title:        "Design Verification Engineer",
   // Drop your ImgBB direct link or Base64 string here. 
   // If left empty (""), the script auto-renders a clean visual placeholder box.
-  image:        "https://ibb.co/4w1jrsNg", 
+  image:        "https://i.ibb.co/PsD5HTCz/Image.png", 
   tagline:      "Design Verification Engineer with 2+ years of industry experience...",
   address:      "Wundtstr. 7, 01217 Dresden, Germany",
   phone:        "+49 15510110425",
