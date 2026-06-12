@@ -12,7 +12,7 @@ const DATA = {
   // ── Personal ────────────────────────────────────────────
   name:         "Al-Amin Hossain",
   title:        "Design Verification Engineer",
-  tagline:      "Design Verification Engineer with 2+ years of industry experience in UVM-based IP verification. Strong expertise in SystemVerilog, UVM, coverage-driven verification, and Python automation.",
+  tagline:      "Design Verification Engineer with 2+ years of industry experience in UVM-based IP verification. Strong expertise in SystemVerilog, UVM, coverage-driven verification, and Python automation. Currently pursuing an M.Sc. in Nanoelectronic Systems at TU Dresden.",
   address:      "Wundtstr. 7, 01217 Dresden, Germany",
   phone:        "+49 15510110425",
   email:        "alaminhossain01615@gmail.com",
@@ -35,8 +35,8 @@ const DATA = {
 
   // ── About paragraphs (website only) ─────────────────────
   about: [
-    "Design Verification Engineer with 2+ years of industry experience building UVM-based verification environments for complex IP blocks — timers, bus protocols, and communication interfaces.",
-    "Currently pursuing an M.Sc. in Nanoelectronic Systems at TU Dresden, with focus on hardware modelling, neural network accelerators, and memristive systems.",
+    "Design Verification Engineer with 2+ years of industry experience building UVM-based verification environments for complex IP blocks — timers, bus protocols, and communication interfaces. Currently working as a Working Student in Digital Functional Verification at Infineon Technologies AG, Dresden.",
+    "Pursuing an M.Sc. in Nanoelectronic Systems at TU Dresden, with focus on hardware modelling, neural network accelerators, and memristive systems.",
     "I combine rigorous verification discipline from industry with a research mindset in AI hardware — positioned at the intersection of traditional RTL verification and next-generation accelerator design."
   ],
 
@@ -54,6 +54,17 @@ const DATA = {
 
   // ── Work experience ─────────────────────────────────────
   experience: [
+    {
+      title:    "Working Student – Digital Functional Verification",
+      company:  "Infineon Technologies AG",
+      location: "Dresden, Germany",
+      type:     "Working Student",
+      period:   "Apr 2026 – Present",
+      bullets: [
+        "Performing digital functional verification for semiconductor IP blocks using industry-standard UVM methodology.",
+        "Contributing to testbench development and coverage closure for advanced digital designs."
+      ]
+    },
     {
       title:    "Assistant Engineer – RTL Design Verification",
       company:  "Ulkasemi Pvt. Ltd.",
@@ -98,30 +109,34 @@ const DATA = {
       period: "Dec 2023 – Mar 2024",
       type:   "Verification",
       bullets: [
-        "Designed full UVM testbench: driver, monitor, sequencer, scoreboard.",
-        "Implemented RAL with register callbacks and reset validation.",
-        "Developed 45+ directed and constrained-random sequences.",
-        "Wrote SVA checkers for interrupts, overflow, and counter accuracy."
+        "Designed a complete UVM testbench including driver, monitor, sequencer, and scoreboard for a multi-mode timer IP supporting periodic, one-shot, and PWM operating modes.",
+        "Implemented UVM RAL model for all timer control and status registers, with register callbacks for reset validation and mirror/desired value cross-checking.",
+        "Developed 45+ directed and constrained-random sequences targeting corner cases including timer overflow, interrupt masking, and prescaler boundary conditions.",
+        "Wrote SVA checkers to formally verify interrupt generation, counter overflow behaviour, and reload accuracy across all operating modes."
       ],
       tags:   ["UVM", "SystemVerilog", "RAL", "SVA"]
     },
     {
-      name:   "AHB-to-UART Bridge Verification",
+      name:   "AHB-UART Verification",
       period: "Jul 2023 – Dec 2023",
       type:   "Verification",
       bullets: [
-        "Architected 3-agent UVM environment (AHB, UART, DMA).",
-        "Built custom register callbacks for 10+ interrupt fields with automatic mirroring between raw/masked status registers and FIFO state tracking."
+        "Architected a 3-agent UVM environment (AHB master, UART, DMA) to verify an IP where the UART is fully configured via AHB — register writes and FIFO data transfers are performed exclusively over the AHB protocol.",
+        "Developed custom UVM RAL register callbacks for 10+ interrupt fields, implementing automatic mirroring between raw and masked status registers and tracking FIFO fill-level state.",
+        "Built constrained-random AHB burst sequences covering back-to-back FIFO writes, read-after-write register checks, and interrupt clear/set cycles.",
+        "Verified protocol-level compliance of AHB transactions against the AMBA specification using SVA-based protocol checkers."
       ],
-      tags:   ["AMBA AHB", "UART", "UVM", "Protocol Verification"]
+      tags:   ["AMBA AHB", "UART", "UVM", "RAL", "SVA"]
     },
     {
       name:   "Multi-Protocol Slave Interface (I2C / AHB / APB)",
       period: "Jan 2023 – Jun 2023",
       type:   "Verification",
       bullets: [
-        "Developed reusable UVM components and verification plan.",
-        "Built functional coverage for protocol states and arbitration."
+        "Developed reusable UVM agent components (driver, monitor, sequencer) for I2C, AHB, and APB protocols, enabling a modular multi-protocol verification environment.",
+        "Built a detailed verification plan covering functional, protocol, and boundary-condition scenarios for all three interfaces.",
+        "Implemented functional coverage groups capturing protocol states, arbitration outcomes, address phases, and error conditions across all three bus interfaces.",
+        "Achieved 100% functional coverage closure and identified 6+ RTL bugs through constrained-random stimulus and directed corner-case tests."
       ],
       tags:   ["I2C", "AHB", "APB", "Functional Coverage"]
     },
@@ -130,9 +145,9 @@ const DATA = {
       period: "Bachelor Thesis",
       type:   "Research",
       bullets: [
-        "Designed CNN–BiLSTM architecture for spatial-temporal learning.",
-        "Outperformed baseline models on short-term load demand forecasting.",
-        "Publication: AIP Conference Proceedings, 2024 (DOI: 10.1063/5.0231967)."
+        "Designed a parallel CNN–BiLSTM hybrid deep learning architecture that jointly extracts spatial features (CNN) and captures bidirectional temporal dependencies (BiLSTM) from historical load data.",
+        "Trained and evaluated the model on real-world power consumption datasets, outperforming LSTM, GRU, and CNN-LSTM baselines on RMSE and MAE metrics.",
+        "Published results in AIP Conference Proceedings, 2024 (DOI: 10.1063/5.0231967)."
       ],
       tags:   ["Deep Learning", "CNN", "BiLSTM", "Python"]
     },
@@ -141,8 +156,8 @@ const DATA = {
       period: "2021",
       type:   "Hardware Design",
       bullets: [
-        "Designed resource-optimised ALU using shared arithmetic units.",
-        "Implemented FSM-based control and shift-register architecture."
+        "Designed a resource-optimised 4-bit ALU supporting addition, subtraction, AND, OR, XOR, and shift operations using a single shared adder circuit to minimise gate count.",
+        "Implemented an FSM-based control unit to sequence operations and manage carry/borrow propagation, and validated the design through directed Verilog simulation."
       ],
       tags:   ["Verilog", "FSM", "Hardware Design"]
     }
