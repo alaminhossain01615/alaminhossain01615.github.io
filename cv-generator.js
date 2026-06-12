@@ -93,23 +93,30 @@ async function downloadCV(e) {
   doc.text('Email: ' + D.email, ML, y);
   y += LS_BODY;
 
-  // Clickable link buttons: LinkedIn | GitHub | Website
+// Clickable link buttons: LinkedIn | GitHub | Website
   const links = [
     { label: 'LinkedIn', url: D.linkedin },
     { label: 'GitHub',   url: D.github },
     { label: 'Website',  url: 'https://' + D.website.replace('https://', '') }
   ];
+  
   let lx = ML;
   links.forEach((lk, i) => {
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(40, 100, 200);
+    doc.setFontSize(9); // Made slightly larger to match standard text readability
+    doc.setTextColor(40, 100, 200); // Clean hyperlink blue
+    
+    // 1. Print the clean label and tie the interactive link to it
     doc.textWithLink(lk.label, lx, y, { url: lk.url });
-    lx += doc.getTextWidth(lk.label) + 1;
+    
+    // Move our tracker past the label text
+    lx += doc.getTextWidth(lk.label) + 1.5;
+    
+    // 2. Print the divider if it's not the last link
     if (i < links.length - 1) {
       doc.setTextColor(...INK3);
-      doc.text(' |', lx - 1, y);
-      lx += doc.getTextWidth(' | ') + 0.5;
+      doc.text('|', lx, y);
+      lx += doc.getTextWidth('|') + 2; // Add a little breathing room after the divider
     }
   });
   y += 7;
