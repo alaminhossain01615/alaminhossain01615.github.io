@@ -37,7 +37,7 @@ function render() {
       </div>
       <div>
         <p class="exp-title">${e.title}</p>
-        <ul class="exp-list">${e.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+        ${e.bullets.length ? `<ul class="exp-list">${e.bullets.map(b => `<li>${b}</li>`).join('')}</ul>` : ''}
       </div>
     </div>
   `).join('');
