@@ -17,8 +17,8 @@ const DATA = {
   phone:        "+49 15510110425",
   email:        "alaminhossain01615@gmail.com",
   linkedin:     "https://www.linkedin.com/in/alaminhossain01615/",
-  github:       "https://github.com/yourusername",
-  website:      "https://yourwebsite.com",
+  github:       "https://github.com/alaminhossain01615",
+  website:      "https://alaminhossain01615.github.io",
 
   // Shown in the availability badge on the website
   availability: "Immediate · Flexible · On-site / Hybrid / Remote",
@@ -60,10 +60,6 @@ const DATA = {
       location: "Dresden, Germany",
       type:     "Working Student",
       period:   "Apr 2026 – Present",
-      bullets: [
-        "Performing digital functional verification for semiconductor IP blocks using industry-standard UVM methodology.",
-        "Contributing to testbench development and coverage closure for advanced digital designs."
-      ]
     },
     {
       title:    "Assistant Engineer – RTL Design Verification",
