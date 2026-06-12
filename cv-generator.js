@@ -96,7 +96,8 @@ async function downloadCV(e) {
   // LinkedIn  GitHub  Website
   const linksStr =
     'LinkedIn: ' + D.linkedin.replace('https://', '') +
-    '    GitHub: ' + D.github.replace('https://', '');
+    '    GitHub: ' + D.github.replace('https://', '') +
+    '    Website: ' + D.website.replace('https://', '');
   doc.text(linksStr, ML, y);
   y += 7;
 

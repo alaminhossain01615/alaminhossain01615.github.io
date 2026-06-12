@@ -86,6 +86,7 @@ function render() {
     <a href="mailto:${D.email}" class="btn btn-dark">✉ ${D.email}</a>
     <a href="${D.linkedin}" class="btn btn-outline" target="_blank">LinkedIn</a>
     <a href="${D.github}"   class="btn btn-outline" target="_blank">GitHub</a>
+    <a href="https://${D.website.replace('https://','')}" class="btn btn-outline" target="_blank">Website</a>
     <button class="btn btn-outline" onclick="downloadCV(event)">↓ Download CV</button>
   `;
 
