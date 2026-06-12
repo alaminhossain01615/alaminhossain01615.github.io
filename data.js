@@ -61,6 +61,7 @@ const DATA = {
       location: "Dresden, Germany",
       type:     "Working Student",
       period:   "Apr 2026 – Present",
+      domain:   "infineon.com",
       bullets: []
     },
     {
@@ -69,6 +70,7 @@ const DATA = {
       location: "Bangladesh",
       type:     "Full-time",
       period:   "Nov 2022 – Nov 2024",
+      domain:   "ulkasemi.com",
       bullets: [
         "Developed and maintained 5+ UVM verification environments for IPs including AHB-UART, GPTM, I2C, and AMBA interfaces.",
         "Built Python-based regression and coverage automation, reducing manual effort by 80%.",
@@ -83,6 +85,7 @@ const DATA = {
       location: "Bangladesh",
       type:     "Internship",
       period:   "May 2022 – Aug 2022",
+      domain:   "robi.com.bd",
       bullets: [
         "Supported spectrum analysis and interference mitigation.",
         "Reviewed regulatory compliance reports."

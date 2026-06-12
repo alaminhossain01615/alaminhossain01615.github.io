@@ -158,14 +158,24 @@ async function downloadCV(e) {
   // SECTIONS FLOW
   // ════════════════════════════════════════════════════════
   
-  // 1. Professional Summary
+// 1. Professional Summary
   secHead('Professional Summary');
+  
+  // Wrap text cleanly dynamically across your Page Content Width (TW)
   const sumLines = wrap(D.tagline, TW, 9);
+  
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   doc.setTextColor(...INK2);
-  doc.text(sumLines, ML, y);
-  y += linesH(sumLines, LS_BODY) + 6;
+  
+  // Cleanly loop through each wrapped line to prevent text truncation or overwriting
+  sumLines.forEach(line => {
+    checkPage(LS_BODY);
+    doc.text(line, ML, y);
+    y += LS_BODY;
+  });
+  
+  y += 5; // Add clean separation spacing before starting the next section
 
   // 2. Education
   secHead('Education');

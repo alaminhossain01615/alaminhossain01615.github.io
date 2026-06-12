@@ -37,19 +37,35 @@ function render() {
     D.interests.map(i => `<span class="chip">${i}</span>`).join('');
 
   // ── Experience ────────────────────────────────────────
-  document.getElementById('exp-list').innerHTML = D.experience.map(e => `
-    <div class="exp-item">
-      <div class="exp-meta">
+  document.getElementById('exp-list').innerHTML = D.experience.map(e => {
+    // Automatically generate the Clearbit API URL if a domain exists
+    const logoUrl = (e.domain && e.domain.trim() !== "")
+      ? `https://logo.clearbit.com/${e.domain.trim()}`
+      : "";
+
+    const logoHtml = logoUrl 
+      ? `<img class="company-logo" src="${logoUrl}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="${e.company} logo">
+         <div class="company-logo-placeholder" style="display: none;">🏢</div>` 
+      : `<div class="company-logo-placeholder">🏢</div>`;
+
+    return `
+      <div class="exp-item">
         <p class="exp-period">${e.period}</p>
-        <p class="exp-company">${e.company}</p>
-        <p class="exp-location">${e.location}${e.type ? ' · ' + e.type : ''}</p>
+        <div class="exp-main-layout">
+          <div class="logo-container-wrapper">
+            ${logoHtml}
+          </div>
+          <div class="exp-details-block">
+            <p class="exp-title">${e.title}</p>
+            <p class="exp-company">${e.company} &middot; ${e.location} ${e.type ? `(${e.type})` : ''}</p>
+            <ul class="exp-bullets">
+              ${e.bullets.map(b => `<li>${b}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
       </div>
-      <div>
-        <p class="exp-title">${e.title}</p>
-        ${e.bullets.length ? `<ul class="exp-list">${e.bullets.map(b => `<li>${b}</li>`).join('')}</ul>` : ''}
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
   // ── Skills ────────────────────────────────────────────
   document.getElementById('skills-table').innerHTML = D.skills.map(s => `
