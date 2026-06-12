@@ -227,37 +227,32 @@ hr.rule { border: none; border-top: 1px solid var(--rule); }
   border-radius: 2px; color: var(--ink-2);
 }
 
-/* ── EXPERIENCE ─────────────────────────────────────── */
+/* ── EXPERIENCE (2-Column Original Layout with Automated Logo Support) ── */
 .exp-item {
-  padding: 2.5rem 0; border-bottom: 1px solid var(--rule);
-  display: grid; grid-template-columns: 220px 1fr;
-  gap: 3rem; align-items: start;
+  padding: 2.5rem 0; 
+  border-bottom: 1px solid var(--rule);
+  display: grid; 
+  grid-template-columns: 220px 1fr; /* Restores your exact layout column width split */
+  gap: 3rem; 
+  align-items: start;
 }
 .exp-item:last-child { border-bottom: none; }
 
-.exp-period  { font-family: var(--mono); font-size: 0.73rem; color: var(--ink-3); margin-bottom: 0.4rem; }
-.exp-company { font-size: 0.85rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; }
-.exp-location{ font-size: 0.8rem; color: var(--ink-3); }
-.exp-title   { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; }
+.exp-period   { font-family: var(--mono); font-size: 0.73rem; color: var(--ink-3); }
+.exp-title    { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; line-height: 1.2; }
+.exp-company  { font-size: 0.85rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; }
+.exp-location { font-size: 0.8rem; color: var(--ink-3); }
 
-.exp-list { list-style: none; }
-.exp-list li {
-  position: relative; padding-left: 1.1rem;
-  color: var(--ink-2); font-size: 0.92rem; font-weight: 400;
-  margin-bottom: 0.5rem; line-height: 1.65;
-}
-.exp-list li::before { content: '–'; position: absolute; left: 0; color: var(--ink-3); }
-
-/* ── COMPANY LOGO STYLING ── */
+/* Automated Logo Row Wrapper inside the right detail block */
 .exp-main-layout {
   display: flex;
   align-items: flex-start;
   gap: 1.2rem;
-  margin-top: 0.3rem;
 }
 
-.exp-details-block {
-  flex: 1;
+.logo-container-wrapper {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
 }
 
 .company-logo {
@@ -268,7 +263,6 @@ hr.rule { border: none; border-top: 1px solid var(--rule); }
   border: 1px solid var(--rule);
   background: var(--white);
   padding: 3px;
-  flex-shrink: 0;
 }
 
 .company-logo-placeholder {
@@ -280,7 +274,40 @@ hr.rule { border: none; border-top: 1px solid var(--rule); }
   font-size: 1.2rem;
   background: #eee;
   border-radius: 6px;
-  flex-shrink: 0;
+}
+
+.exp-details-block {
+  flex: 1;
+}
+
+/* Bullets styling configured exactly to match your clean portfolio default look */
+.exp-bullets { 
+  list-style: none; 
+  margin-top: 1rem;
+}
+.exp-bullets li {
+  position: relative; 
+  padding-left: 1.1rem;
+  color: var(--ink-2); 
+  font-size: 0.92rem; 
+  font-weight: 400;
+  margin-bottom: 0.5rem; 
+  line-height: 1.65;
+}
+.exp-bullets li::before { 
+  content: '–'; 
+  position: absolute; 
+  left: 0; 
+  color: var(--ink-3); 
+}
+
+/* Clean collapse transition layout rule optimized for mobile responsive scaling viewports */
+@media (max-width: 768px) {
+  .exp-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
 }
 
 /* ── SKILLS ─────────────────────────────────────────── */
