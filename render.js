@@ -7,7 +7,7 @@
 function render() {
   const D = DATA;
 
-  // ── Hero ──────────────────────────────────────────────
+// ── Hero ──
   document.getElementById('h-eyebrow').textContent = D.title;
   document.getElementById('h-name').innerHTML =
     D.name.split(' ').map((w, i) => i === 0 ? w : `<strong>${w}</strong>`).join(' ');
