@@ -60,10 +60,7 @@ const DATA = {
       location: "Dresden, Germany",
       type:     "Working Student",
       period:   "Apr 2026 – Present",
-      bullets: [
-        "Performing digital functional verification for semiconductor IP blocks using industry-standard UVM methodology.",
-        "Contributing to testbench development and coverage closure for advanced digital designs."
-      ]
+      bullets: []
     },
     {
       title:    "Assistant Engineer – RTL Design Verification",
